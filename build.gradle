@@ -1,0 +1,57 @@
+group 'com.paulhoang'
+version '1.4'
+
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            url 'https://plugins.gradle.org/m2/'
+        }
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:1.4.3.RELEASE"
+        classpath 'org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.2-rc1'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'application'
+apply plugin: 'org.sonarqube'
+apply plugin: "org.springframework.boot"
+
+mainClassName = "com.paulhoang.Application"
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web:1.4.3.RELEASE")
+    compile("org.apache.kafka:kafka-clients:0.10.1.0")
+    compile("com.google.code.gson:gson:2.8.0")
+
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.thymeleaf:thymeleaf-spring4")
+    compile("nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect")
+
+    compile("org.influxdb:influxdb-java:2.5")
+    compile 'org.mongodb:mongodb-driver:3.0.4'
+    compile group: 'com.rethinkdb', name: 'rethinkdb-driver', version: '2.3.3'
+
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+sonarqube {
+    properties {
+        property "sonar.projectName", "mySharesConsumer"
+        property "sonar.projectKey", "mySharesConsumer"
+        property "sonar.host.url", "http://192.168.1.51:9000/"
+        property "sonar.java.coveragePlugin", "jacoco"
+//        property "sonar.jdbc.url", "jdbc:mysql://10.42.58.229:3306/sonar"
+//        property "sonar.jdbc.driverClassName", "com.mysql.jdbc.Driver"
+    }
+}

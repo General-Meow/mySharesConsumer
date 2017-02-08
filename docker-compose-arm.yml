@@ -1,0 +1,45 @@
+version: "2"
+services:
+  influxconsumer:
+    container_name: "influxconsumer"
+    image: ${CONSUMER_IMAGE}-arm
+    links:
+      - "influxdb"
+      - "mongodb"
+      - "rethinkdb"
+    command:
+      - influxdb
+      - prod
+  mongoconsumer:
+    container_name: "mongoconsumer"
+    image: ${CONSUMER_IMAGE}-arm
+    links:
+      - "influxdb"
+      - "mongodb"
+      - "rethinkdb"
+    command:
+      - mongodb
+      - prod
+  influxdb:
+    container_name: "influxdb"
+    image: ${INFLUX_IMAGE}-arm
+    ports:
+      - "8086:8086"
+    volumes:
+      - /var/lib/influxdb
+  mongodb:
+    container_name: "mongodb"
+    image: ${MONGO_IMAGE}-arm
+    ports:
+      - "27017:27017"
+      - "28017:28017"
+    volumes:
+      - /data/db
+  rethinkdb:
+    container_name: "rethinkdb"
+    image: ${RETHINK_IMAGE}-arm
+    ports:
+      - "28015:28015"
+      - "8080:8080"
+    volumes:
+      - /var/log/rethinkdb

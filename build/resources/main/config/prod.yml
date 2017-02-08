@@ -1,0 +1,9 @@
+kafkaServer: redpearl.paulhoang.com:9092
+mongodbServer: greenpearl.paulhoang.com
+mongodbServerPort: 27017
+rethinkdbServer: greenpearl.paulhoang.com
+rethinkdbServerPort: 28015
+influxdbServer: greenpearl.paulhoang.com
+influxdbServerPort: 8086
+databaseName: Shares
+tableName: SharePrices

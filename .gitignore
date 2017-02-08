@@ -1,0 +1,3 @@
+build/distributions
+build/classes
+build/libs/*.original
