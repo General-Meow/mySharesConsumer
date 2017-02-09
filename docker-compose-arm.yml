@@ -8,8 +8,8 @@ services:
       - "mongodb"
       - "rethinkdb"
     command:
-      - influxdb
-      - prod
+      - "--spring.config.name=prod"
+      - "influxdb"
   mongoconsumer:
     container_name: "mongoconsumer"
     image: ${CONSUMER_IMAGE}-arm
@@ -18,8 +18,18 @@ services:
       - "mongodb"
       - "rethinkdb"
     command:
-      - mongodb
-      - prod
+      - "--spring.config.name=prod"
+      - "mongodb"
+  rethinkconsumer:
+    container_name: "rethinkconsumer"
+    image: ${CONSUMER_IMAGE}-arm
+    links:
+      - "influxdb"
+      - "mongodb"
+      - "rethinkdb"
+    command:
+      - "--spring.config.name=prod"
+      - "rethinkdb"
   influxdb:
     container_name: "influxdb"
     image: ${INFLUX_IMAGE}-arm

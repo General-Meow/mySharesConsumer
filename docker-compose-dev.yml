@@ -8,7 +8,7 @@ services:
       - "mongodb"
       - "rethinkdb"
     command:
-      - "--spring.config.name=prod"
+      - "--spring.config.name=dev"
       - "influxdb"
   mongoconsumer:
     container_name: "mongoconsumer"
@@ -18,7 +18,7 @@ services:
       - "mongodb"
       - "rethinkdb"
     command:
-      - "--spring.config.name=prod"
+      - "--spring.config.name=dev"
       - "mongodb"
   rethinkconsumer:
     container_name: "rethinkconsumer"
@@ -28,7 +28,7 @@ services:
       - "mongodb"
       - "rethinkdb"
     command:
-      - "--spring.config.name=prod"
+      - "--spring.config.name=dev"
       - "rethinkdb"
   influxdb:
     container_name: "influxdb"
